@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>simpleservice</id>
+    <version>1.5</version>
+    <title>Simple Service</title>
+    <authors>TheCodingBug.com</authors>
+    <owners>Andreas</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>SimpleService makes it easy to create web services for ajax functionality.</description>
+    <releaseNotes>No need to set path to controls anymore!</releaseNotes>
+    <tags>service, ajax</tags>
+    <dependencies>
+      <dependency id="WebActivator" version="1.5" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="\content\App_Start\SimpleService.cs.pp" target="content\App_Start\SimpleService.cs.pp" />
+    <file src="\content\Services\SampleService.cs.pp" target="content\Services\SampleService.cs.pp" />
+    <file src="\lib\net40\SimpleService.dll" target="lib\net40\SimpleService.dll" />
+  </files>
+</package>

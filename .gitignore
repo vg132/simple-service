@@ -1,0 +1,13 @@
+build
+*.suo
+*.user
+bin
+obj
+_ReSharper*
+*.csproj.user
+*.resharper.user
+*.cache
+*.sln.docstates*
+*.ReSharper
+*.DotSettings
+src/NuGetPackage/lib/net40/*
