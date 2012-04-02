@@ -7,15 +7,16 @@ namespace SimpleService {
     public class ControlResult<TControl> : ServiceResult where TControl : Control {
         public string Path { get; set; }
         public Action<TControl> ControlAction { get; set; }
+        public bool AddFormWrapper { get; set; }
 
         public override void Execute(ServiceContext context) {
-            string controlHtml = GetRenderedControlHtml(Path, ControlAction);
+            string controlHtml = GetRenderedControlHtml(Path, ControlAction, AddFormWrapper);
 
             context.HttpContext.Response.ContentType = "text/html";
             context.HttpContext.Response.Write(controlHtml);
         }
 
-        public virtual string GetRenderedControlHtml<T>(string path = null, Action<T> controlAction = null) where T : Control {
+        public virtual string GetRenderedControlHtml<T>(string path = null, Action<T> controlAction = null, bool addFormWrapper = false) where T : Control
             if (string.IsNullOrEmpty(path))
                 path = ResolveControlPath(typeof(TControl));
 
@@ -25,7 +26,14 @@ namespace SimpleService {
             if (controlAction != null)
                 controlAction((T)control);
 
-            page.Controls.Add(control);
+    		if (addFormWrapper) {
+				var form = new HtmlForm();
+				form.Controls.Add(control);
+				page.Controls.Add(form);
+			}
+			else {
+				page.Controls.Add(control);
+			}
 
             using (StringWriter output = new StringWriter()) {
                 HttpContext.Current.Server.Execute(page, output, false);
