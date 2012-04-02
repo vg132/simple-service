@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Web;
@@ -74,8 +74,8 @@ namespace SimpleService {
             return new ContentResult {Text = text, ContentType = contentType };
         }
 
-        protected virtual ControlResult<Control> Control(string path, Action<Control> controlAction = null) {
-            return new ControlResult<Control> {Path = path, ControlAction = controlAction};
+        protected virtual ControlResult<Control> Control(string path, Action<Control> controlAction = null, bool addFormWrapper = false) {
+    				return new ControlResult<Control> { Path = path, ControlAction = controlAction, AddFormWrapper = addFormWrapper };
         }
 
         /// <summary>
@@ -84,8 +84,8 @@ namespace SimpleService {
         /// <typeparam name="TControl">The control type.</typeparam>
         /// <param name="path">Path to control. Start with ~/.</param>
         /// <param name="controlAction"></param>
-        protected virtual ControlResult<TControl> Control<TControl>(string path = null, Action<TControl> controlAction = null) where TControl : Control {
-            return new ControlResult<TControl> {Path = path, ControlAction = controlAction};
+        protected virtual ControlResult<TControl> Control<TControl>(string path = null, Action<TControl> controlAction = null, bool addFormWrapper = false) where TControl : Control {
+					return new ControlResult<TControl> { Path = path, ControlAction = controlAction, AddFormWrapper = addFormWrapper };
         }
 
         /// <summary>
